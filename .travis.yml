@@ -1,0 +1,38 @@
+language: python
+
+python:
+  - "3.8"
+
+services: postgresql
+
+addons:
+  postgresql: "9.6"
+
+env:
+  - DJANGO=3.1
+
+before_install:
+  - export DJANGO_SETTINGS_MODULE=conf.settings
+  - export PYTHONPATH=$PYTHONPATH:$(pwd)
+  - export PIP_USE_MIRRORS=true
+
+# install requirements
+install:
+  - pip install pipenv
+  - make pip-install
+  - pipenv install django==$DJANGO --quiet
+  - pipenv install psycopg2 --quiet
+
+before_script:
+  - psql -c "CREATE DATABASE pizzaspot;" -U postgres
+  - make migrations
+  - make migrate
+
+# command to run tests
+script:
+  - python manage.py collectstatic --noinput --settings=conf.settings
+  - make test_coverage
+
+# send coverage report to coveralls
+after_success:
+  coveralls
