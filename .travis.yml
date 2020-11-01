@@ -13,7 +13,7 @@ env:
 
 before_install:
   - export DJANGO_SETTINGS_MODULE=conf.settings
-  - export PYTHONPATH=$PYTHONPATH:$(pwd)
+  - export PYTHONPATH=$HOME/builds/zachang/pizzaspot
   - export PIP_USE_MIRRORS=true
 
 # install requirements
