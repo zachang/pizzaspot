@@ -20,8 +20,8 @@ before_install:
 install:
   - pip install pipenv
   - make pip-install
-  - pipenv install django==$DJANGO --quiet
-  - pipenv install psycopg2 --quiet
+  - pipenv install django==$DJANGO
+  - pipenv install psycopg2
 
 before_script:
   - psql -c "CREATE DATABASE pizzaspot;" -U postgres
