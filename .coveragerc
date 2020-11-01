@@ -1,0 +1,11 @@
+[run]
+branch = True
+omit =
+    manage.py
+    */apps.py
+    */migrations/*
+    */conf/*
+    */serializers.py
+    */admin.py
+    */tests/*
+    */urls.py
