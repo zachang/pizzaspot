@@ -7,7 +7,7 @@ router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'pizzas', PizzaViewSet)
 router.register(r'toppings', ToppingViewSet)
 
-app_name = 'customer'
+app_name = 'pizza'
 urlpatterns = [
     path('', include(router.urls)),
 ]
