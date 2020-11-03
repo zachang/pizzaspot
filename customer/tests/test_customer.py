@@ -22,6 +22,7 @@ class CustomerTestCase(APITestCase):
         response = self.client.get(self.url, format="json")
         self.assertEqual(response.status_code, HTTP_200_OK)
         self.assertEqual(len(response.data), Customer.objects.count())
+        self.assertEqual(str(self.customer), self.customer.username)
 
     def test_single_customer_successful(self):
         """Verify that a single customer can be retrieved"""
