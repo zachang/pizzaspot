@@ -24,7 +24,7 @@ class OrderList(mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.Generic
     def create(self, request):
         serializer = AddOrderSerializer(data=request.data)
         if serializer.is_valid():
-            pizza = get_object_or_404(Pizza, pk=request.data['pizza'])
+            pizza = get_object_or_404(Pizza, pk=request.data.get('pizza', 0))
 
             # TODO: replace with Auth customer when Auth is implemented (request.user)
             customer = get_object_or_404(Customer, pk=request.data['customer'])
@@ -65,7 +65,7 @@ class OrderDetail(mixins.DestroyModelMixin, mixins.RetrieveModelMixin, mixins.Up
             order = self.queryset.get(pk=pk)
             serializer = self.get_serializer(order)
             return Response(
-                {'status': 'Success', 'Order': {
+                {'status': 'Success', 'order': {
                     'delivery_status': serializer.data['delivery_status']}
                  },
                 status=HTTP_200_OK,
@@ -77,7 +77,7 @@ class OrderDetail(mixins.DestroyModelMixin, mixins.RetrieveModelMixin, mixins.Up
             )
 
     @action(detail=True, methods=['PUT'])
-    def check_out(self, request, pk=None):
+    def checkout(self, request, pk=None):
         try:
             order = Order.objects.get(pk=pk)
             serializer = CheckoutSerializer(order, data=request.data)

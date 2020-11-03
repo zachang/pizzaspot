@@ -36,9 +36,8 @@ class OrderListSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def update(self, instance, validated_data):
-        if instance.delivery_status in ['pending', 'preparing']:
+        if not instance.checkout_status:
             instance.cancel_reason = validated_data.get("cancel_reason", instance.cancel_reason)
-            instance.checkout_status = bool(validated_data.get("checkout_status", instance.checkout_status))
             instance.delivery_address = validated_data.get("delivery_address", instance.delivery_address)
             instance.delivery_status = validated_data.get("delivery_status", instance.delivery_status)
             instance.phone_number = validated_data.get("phone_number", instance.phone_number)

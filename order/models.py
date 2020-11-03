@@ -39,16 +39,13 @@ class Order(models.Model):
 
     @property
     def get_total_cost(self):
-        return sum(item.get_cost() for item in self.order_items.all())
+        return sum(float(item.get_cost) for item in self.order_items.all())
 
     def __str__(self):
         return self.delivery_status
 
 
 class OrderItem(models.Model):
-    DELIVERED = 'delivered'
-    UNDELIVERED = 'undelivered'
-
     pizza = models.ForeignKey(Pizza, on_delete=models.CASCADE, related_name="pizza_order_items")
     quantity = models.PositiveIntegerField(default=1)
 
@@ -56,8 +53,9 @@ class OrderItem(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    @property
     def get_cost(self):
         return self.pizza.price * self.quantity
 
     def __str__(self):
-        return self.quantity
+        return str(self.quantity)
