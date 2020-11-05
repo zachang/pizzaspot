@@ -19,7 +19,7 @@ A concept for pizza ordering app
     ## Migarations
     
     - Run `docker-compose run --rm api pipenv run python manage.py makemigrations`
-    - Run `docker-compose run --rm api pipenv run python manage.py makemigrate`
+    - Run `docker-compose run --rm api pipenv run python manage.py migrate`
     - For new model changes run `1st` step before `2nd` step.
 
 ## Setup without Docker
