@@ -16,7 +16,7 @@ A concept for pizza ordering app
 - After build, Run `docker-compose up api` to start app
 - For Test, Run `docker-compose run --rm api pipenv run python manage.py test`
 
-    ## Migarations
+    ## Migrations
     
     - Run `docker-compose run --rm api pipenv run python manage.py makemigrations`
     - Run `docker-compose run --rm api pipenv run python manage.py migrate`
@@ -32,7 +32,7 @@ A concept for pizza ordering app
 - Run `pipenv install` (installs all dependencies)
 - Run `pipenv run python manage.py runserver`
 - For test, Run `pipenv run python manage.py test`
-    ## Migarations
+    ## Migrations
     
     - Run `pipenv run python manage.py makemigrations`
     - Run `pipenv run python manage.py migrate`
